@@ -24,7 +24,7 @@
       <% @dictionaries.each do |dictionary| %>
       <tr>
         <td><%= link_to dictionary.name, dictionary %></td>
-	<td><%= dictionary.created_at.to_formatted_s(:short)   %></td>
+	<td><%= dictionary.created_at.to_formatted_s(:short) %></td>
 	<td><%= dictionary.entries.count %></td>
       </tr>
       <% end %>

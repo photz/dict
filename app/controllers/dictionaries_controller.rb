@@ -5,7 +5,7 @@ class DictionariesController < ApplicationController
 
   # GET /dictionaries
   def index
-    @dictionaries = Dictionary.all
+    @dictionaries = Dictionary.where(public: true)
   end
 
   # GET /dictionaries/1
@@ -74,7 +74,7 @@ class DictionariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dictionary_params
-      params.require(:dictionary).permit(:name, :description)
+      params.require(:dictionary).permit(:name, :description, :public)
     end
 
     def restrict_access

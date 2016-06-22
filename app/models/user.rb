@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
             presence: true,
             length: { minimum: 6 }
 
+
   def authenticated?(remember_token)
     return false if rememmber_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)

@@ -21,6 +21,13 @@
     <%= f.label :description, class: 'control-label' %>
     <%= f.text_area :description, class: 'form-control' %>
   </div>
+  <div class="checkbox">
+    <label>
+    <%= f.check_box :public %>
+    public
+    </label>
+    <p class="help-block">If this check box is ticked, everybody will be able to see the dictionary.</p>
+  </div>
   <div class="form-group">
     <%= f.submit class: 'btn btn-primary' %>
   </div>
