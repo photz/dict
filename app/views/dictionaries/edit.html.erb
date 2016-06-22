@@ -1,0 +1,12 @@
+<ol class="breadcrumb">
+  <li class=""><%= link_to "Dictionaries", dictionaries_path %></li>
+  <li><%= link_to @dictionary.name, @dictionary %></li>
+  <li class="active"><%= link_to 'Edit Dictionary', '#' %></li>
+</ol>
+
+<h1>Editing Dictionary</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Remove', @dictionary, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+

@@ -1,0 +1,10 @@
+
+#bookname=<%= @dictionary.name %>
+#author=Unknown
+#description=<% @dictionary.description %>
+
+<% @dictionary.entries.each do |entry| %>
+<%= entry.lemmas.map {|l| l.text}.join('|') %>
+<%= entry.content.gsub(/[\n\r]/, '<br>') %>
+
+<% end %>

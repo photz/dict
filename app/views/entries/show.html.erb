@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<ol class="breadcrumb">
+  <li class=""><%= link_to "Dictionaries", dictionaries_path %></li>
+  <li class=""><%= link_to @dictionary.name, @dictionary %></li>
+  <li class="active"><%= link_to 'Entry', '#' %></li>
+</ol>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	Key words
+      </div>
+      <div class="list-group">
+	<% @entry.lemmas.each do |lemma| %>
+	<div class="list-group-item"><%= lemma.text %></div>
+	<% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	Article
+      </div>
+      <div class="panel-body">
+	<p>
+	  <%= article_for_display(@entry.content) %>
+	</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_entry_path(@entry), class: 'btn btn-primary' %> 
+

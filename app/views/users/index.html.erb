@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<ol class="breadcrumb">
+  <li class="active"><%= link_to "Users", users_path %></li>
+</ol>
+
+<h1>Users</h1>
+
+<ul class="list-group">
+  <% @users.each do |user| %>
+  <%= link_to user.name, user, class: 'list-group-item' %>
+  <% end %>
+</ul>
+
+
+
+

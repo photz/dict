@@ -1,0 +1,37 @@
+
+
+<%= form_for([@dictionary, @entry]) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :lemmata, class: 'control-label' %>
+      <%= text_area_tag 'entry[lemmata]', @entry.lemmata.join("\n"), {class: 'form-control'} %>
+      <p class="help-block">
+	Add one key word or lemma per line.
+      </p>
+    </div>
+    <div class="col-md-8">
+
+      <div class="form-group">
+	<%= f.label :content, class: 'control-label' %><br>
+	<%= f.text_area :content, class: 'form-control' %>
+      </div>
+    </div>
+
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

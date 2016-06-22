@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xdxf SYSTEM "https://raw.github.com/soshial/xdxf_makedict/master/format_standard/xdxf_strict.dtd">
+<xdxf lang_from="ENG" lang_to="ENG" format="logical" revision="032beta">
+    <meta_info>
+        <title><%= @dictionary.name %></title>
+        <full_title><%= @dictionary.name %></full_title>
+        <description><%= @dictionary.description %></description>
+        <abbreviations>
+          <abbr_def><abbr_k>n.</abbr_k><abbr_v>noun</abbr_v></abbr_def>
+          <abbr_def><abbr_k>v.</abbr_k><abbr_v>verb</abbr_v></abbr_def>
+          <abbr_def><abbr_k>Av.</abbr_k><abbr_k>Ave.</abbr_k><abbr_v>Avenue</abbr_v> </abbr_def>
+        </abbreviations>
+        <file_ver>001</file_ver>
+        <creation_date><%= @dictionary.created_at.strftime("%m-%d-%Y") %></creation_date>
+    </meta_info>
+    <lexicon>
+    <% @dictionary.entries.each do |entry| %>
+        <ar>
+	<% entry.lemmata.each do |lemma| %>
+	 <k><%= lemma %></k>
+        <% end %>	
+            <def>
+                <deftext><%= entry.content %></deftext>
+            </def>
+        </ar>
+	<% end %>
+    </lexicon>
+</xdxf>
