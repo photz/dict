@@ -1,0 +1,4 @@
+
+== README
+
+This is going to be a simple Rails app that allows groups of people to collaboratively work on dictionaries that can then be exported to be used within dictionary lookup programs such as GoldenDict.
