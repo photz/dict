@@ -31,4 +31,40 @@
   <div class="form-group">
     <%= f.submit class: 'btn btn-primary' %>
   </div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Permissions
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+	<th>Name</th>
+	<th><span class="small">Can create entries</span></th>
+	<th><span class="small">Can edit entries</span></th>
+	<th><span class="small">Can delete entries</span></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <%= f.fields_for(:collaborators) do |collaborator_f| %>
+      <%= collaborator_f.hidden_field :user_id, :value => collaborator_f.object.user_id %>
+      <tr>
+	<td><%= link_to collaborator_f.object.user.name, collaborator_f.object.user %></td>
+	<td><%= collaborator_f.check_box :can_create_entries %></td>
+	<td><%= collaborator_f.check_box :can_change_entries %></td>
+	<td><%= collaborator_f.check_box :can_delete_entries %></td>
+      </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
 <% end %>

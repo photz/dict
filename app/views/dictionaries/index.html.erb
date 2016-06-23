@@ -16,7 +16,8 @@
       <tr>
 	<th>Name</th>
 	<th>Created</th>
-	<th>Number of entries</th>
+	<th>#entries</th>
+	<th>#contributors</th>
       </tr>
     </thead>
 
@@ -26,6 +27,7 @@
         <td><%= link_to dictionary.name, dictionary %></td>
 	<td><%= dictionary.created_at.to_formatted_s(:short) %></td>
 	<td><%= dictionary.entries.count %></td>
+	<td><%= dictionary.collaborators.count + 1 %></td>
       </tr>
       <% end %>
     </tbody>

@@ -6,7 +6,22 @@
 
 <h1>Editing Dictionary</h1>
 
+
 <%= render 'form' %>
 
-<%= link_to 'Remove', @dictionary, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
 
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag dictionary_collaborators_path(@dictionary) do %>
+    <div class="form-group">
+      <%= label_tag :name, nil, {class: 'control-label'} %>
+      <%= text_field_tag :name, nil, {class: 'form-control'} %>
+    </div>
+    <%= submit_tag nil, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+
+<%= link_to 'Remove', @dictionary, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

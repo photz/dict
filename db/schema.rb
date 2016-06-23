@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622230712) do
+ActiveRecord::Schema.define(version: 20160623010409) do
+
+  create_table "collaborators", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "dictionary_id"
+    t.boolean  "can_create_entries"
+    t.boolean  "can_change_entries"
+    t.boolean  "can_delete_entries"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "collaborators", ["dictionary_id"], name: "index_collaborators_on_dictionary_id"
+  add_index "collaborators", ["user_id"], name: "index_collaborators_on_user_id"
 
   create_table "dictionaries", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +32,10 @@ ActiveRecord::Schema.define(version: 20160622230712) do
     t.datetime "updated_at",  null: false
     t.string   "description"
     t.boolean  "public"
+    t.integer  "user_id"
   end
+
+  add_index "dictionaries", ["user_id"], name: "index_dictionaries_on_user_id"
 
   create_table "entries", force: :cascade do |t|
     t.integer  "dictionary_id"

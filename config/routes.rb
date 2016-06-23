@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :dictionaries do
     resources :entries, :only => [:new, :create]
+
+    resources :collaborators, :only => [:create, :destroy]
   end
 
   resources :users

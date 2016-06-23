@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @dictionaries_collaborating =
+      Dictionary.includes(:collaborators).where(collaborators: {user_id: @user.id})
   end
 
   # GET /users/new

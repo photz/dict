@@ -5,15 +5,71 @@
   <li class="active"><%= link_to @user.name, user_path(@user) %></li>
 </ol>
 
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-
-</p>
+<h1><%= @user.name %>'s profile</h1>
 
 <p>
   <strong>Member since:</strong>
   <%= @user.created_at.to_formatted_s(:short) %>
 </p>
 
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	Dictionaries this user created
+      </div>
+      <% if @user.dictionaries.size > 0 %>
+      <table class="table table-condensed">
+	<thead>
+	  <tr>
+	    <th>Name</th>
+	    <th>Entries</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <% @user.dictionaries.each do |dictionary| %>
+	  <tr>
+	    <td><%= link_to dictionary.name, dictionary %></td>
+	    <td><%= dictionary.entries.count %></td>
+	  </tr>
+	  <% end %>
+	</tbody>
+      </table>
+      <% else %>
+      <div class="panel-body">
+	This user has not yet created any dictionaries.
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	Dictionaries this user contributes to 
+      </div>
+      <% if @dictionaries_collaborating.size > 0 %>
+      <table class="table table-condensed">
+	<thead>
+	  <tr>
+	    <th>Name</th>
+	    <th>Entries</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <% @dictionaries_collaborating.each do |dictionary| %>
+	  <tr>
+	    <td><%= link_to dictionary.name, dictionary %></td>
+	    <td><%= dictionary.entries.count %></td>
+	  </tr>
+	  <% end %>
+	</tbody>
+      </table>
+      <% else %>
+      <div class="panel-body">
+	This user is not involved in any dictionary projects.
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

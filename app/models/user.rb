@@ -5,11 +5,13 @@ class User < ActiveRecord::Base
             length: { minimum: 3, maximum: 30 },
             uniqueness: { case_sensitive: false }
 
-  has_secure_password
-
   validates :password,
             presence: true,
             length: { minimum: 6 }
+
+  has_many :dictionaries
+
+  has_secure_password
 
 
   def authenticated?(remember_token)
