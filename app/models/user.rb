@@ -14,6 +14,44 @@ class User < ActiveRecord::Base
   has_secure_password
 
 
+  def can_view_dictionary(dictionary)
+    return true if dictionary.user == self
+
+    return true if dictionary.public
+
+    collaborator = Collaborator.find_by(dictionary: dictionary,
+                                        user: self)
+
+    !collaborator.nil?
+  end
+
+  def can_create_entries(dictionary)
+    return true if dictionary.user == self
+
+    collaborator = Collaborator.find_by(dictionary: dictionary,
+                                        user: self)
+
+    collaborator && collaborator.can_create_entries
+  end
+
+  def can_change_entries(dictionary)
+    return true if dictionary.user == self
+
+    collaborator = Collaborator.find_by(dictionary: dictionary,
+                                        user: self)
+
+    collaborator && collaborator.can_change_entries
+  end
+
+  def can_delete_entries(dictionary)
+    return true if dictionary.user == self
+
+    collaborator = Collaborator.find_by(dictionary: dictionary,
+                                        user: self)
+
+    collaborator && collaborator.can_delete_entries
+  end
+
   def authenticated?(remember_token)
     return false if rememmber_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)

@@ -34,5 +34,6 @@
   </div>
 </div>
 
+<% if current_user.can_change_entries(@entry.dictionary) %>
 <%= link_to 'Edit', edit_entry_path(@entry), class: 'btn btn-primary' %> 
-
+<% end %>

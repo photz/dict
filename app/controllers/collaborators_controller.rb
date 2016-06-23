@@ -1,5 +1,6 @@
 class CollaboratorsController < ApplicationController
   before_filter :set_dictionary
+  before_filter :is_owner
 
   def create
 
@@ -31,12 +32,27 @@ class CollaboratorsController < ApplicationController
   def destroy
     user = User.find_by_id(params[:id])
 
-    
+    if user.nil?
+      assert 'no user found'
+    end
+
+    unless @dictionary.users.include? user
+      assert 'the user specified is not a collaborator'
+    end
+
+    @dictionary.users.delete user
   end
 
   private
 
   def set_dictionary
     @dictionary = Dictionary.find_by_id(params[:dictionary_id])
+  end
+
+  def is_owner
+    unless @dictionary.user == current_user
+      logger.warn 'someone other than the owner of a dictionary tried to add or remove a collaborator'
+      redirect_to root_path
+    end
   end
 end

@@ -12,11 +12,15 @@
 
 
 <div class="panel panel-default">
+  <div class="panel-heading">
+    Add a new collaborator
+  </div>
   <div class="panel-body">
     <%= form_tag dictionary_collaborators_path(@dictionary) do %>
     <div class="form-group">
       <%= label_tag :name, nil, {class: 'control-label'} %>
       <%= text_field_tag :name, nil, {class: 'form-control'} %>
+      <p class="help-block">Initially only the owner of a dictionary can create and change entries.  If you want to allow another use to modify the dictionary, enter their name into the input field and click on the button.  If a user with this name exists, they will become a <em>collaborator</em>.</p>
     </div>
     <%= submit_tag nil, class: 'btn btn-primary' %>
     <% end %>

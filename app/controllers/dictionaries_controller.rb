@@ -11,6 +11,8 @@ class DictionariesController < ApplicationController
   # GET /dictionaries/1
   def show
 
+    root_path unless current_user.can_view_dictionary(@dictionary)
+
     respond_to do |format|
 
       format.html
@@ -32,12 +34,18 @@ class DictionariesController < ApplicationController
 
   # GET /dictionaries/1/edit
   def edit
+    redirect_to root_path unless @dictionary.user == current_user
 
   end
 
   # POST /dictionaries
   def create
+    redirect_to root_path unless @dictionary.user == current_user
+
+
     @dictionary = Dictionary.new(dictionary_params)
+
+    @dictionary.user = current_user
 
     respond_to do |format|
       if @dictionary.save
@@ -50,7 +58,7 @@ class DictionariesController < ApplicationController
 
   # PATCH/PUT /dictionaries/1
   def update
-    logger.info dictionary_params
+    redirect_to root_path unless @dictionary.user == current_user
 
     respond_to do |format|
       if @dictionary.update(dictionary_params)
@@ -63,6 +71,8 @@ class DictionariesController < ApplicationController
 
   # DELETE /dictionaries/1
   def destroy
+    redirect_to root_path unless @dictionary.user == current_user
+
     @dictionary.destroy
     respond_to do |format|
       format.html { redirect_to dictionaries_url, notice: 'Dictionary was successfully destroyed.' }

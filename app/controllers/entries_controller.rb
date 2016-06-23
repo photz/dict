@@ -4,13 +4,9 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_dictionary, except: [:edit, :update]
 
-  # GET /entries
-  def index
-    @entries = Entry.all
-  end
-
   # GET /entries/1
   def show
+    root_path unless current_user.can_view_dictionary(@entry.dictionary)
   end
 
   # GET /entries/new
@@ -20,10 +16,13 @@ class EntriesController < ApplicationController
 
   # GET /entries/1/edit
   def edit
+    root_path unless current_user.can_change_entries(@dictionary)
   end
 
   # POST /entries
   def create
+    root_path unless current_user.can_create_entries(@dictionary)
+
     @entry = Entry.new(entry_params)
 
     lemmata_strings = params[:entry][:lemmata]
@@ -44,6 +43,8 @@ class EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1
   def update
+    root_path unless current_user.can_change_entries(@dictionary)
+
     lemmata_strings = params[:entry][:lemmata]
                       .strip.split("\n").map {|s| s.strip}
 
@@ -64,6 +65,8 @@ class EntriesController < ApplicationController
 
   # DELETE /entries/1
   def destroy
+    root_path unless current_user.can_delete_entries(@dictionary)
+
     @entry.destroy
     respond_to do |format|
       format.html { redirect_to @dictionary, notice: 'Entry was successfully destroyed.' }

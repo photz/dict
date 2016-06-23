@@ -7,6 +7,11 @@
 
 <h1><%= @dictionary.name %></h1>
 
+<p><strong>Creator:</strong> <%= link_to @dictionary.user.name, @dictionary.user %></p>
+<p><strong>Contributors:</strong>
+  <%= @dictionary.users.map { |user| link_to user.name, user }.join(', ').html_safe %></p>
+     
+  
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -31,9 +36,13 @@
 </div>
 
 
+<% if current_user.can_create_entries(@dictionary) %>
 <%= link_to 'New Entry', new_dictionary_entry_path(@dictionary), class: 'btn btn-primary' %>
+<% end %>
 
+<% if @dictionary.user == current_user %>
 <%= link_to 'Edit', edit_dictionary_path(@dictionary), class: 'btn btn-default' %>
+<% end %>
 
 <%= link_to 'Export to Babylon', dictionary_path(@dictionary, format: :babylon), class: 'btn btn-default' %>
 
