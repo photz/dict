@@ -13,41 +13,35 @@
 <div class="row">
 
   <div class="col-md-9">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-	Entries
-      </div>
-      <table class="table table-striped">
-	<thead>
-	  <tr>
-	    <th>Lemma</th>
-	    <th>Article</th>
-	  </tr>
-	</thead>
-	<tbody>
-	  <% @dictionary.entries.each do |entry| %>
-	  <tr>
-	    <td><%= entry.lemmas.first.text %></td>
-	    <td><%= link_to article_for_display(entry.content), entry %></td>
-	  </tr>
-	  <% end %>
-	</tbody>
-      </table>
-    </div>
+    <table class="table table-striped">
+      <thead>
+	<tr>
+	  <th>Lemma</th>
+	  <th>Article</th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @dictionary.entries.each do |entry| %>
+	<tr>
+	  <td><%= entry.lemmas.first.text %></td>
+	  <td><%= link_to article_for_display(entry.content), entry %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
   </div>
 
   <div class="col-md-3">
-    <div class="well">
-      <p><strong>Creator:</strong> <%= link_to @dictionary.user.name, @dictionary.user %></p>
-      <p>
-	<strong>Contributors:</strong>
-	<%= @dictionary.users.map { |user| link_to user.name, user }.join(', ').html_safe %>
-      </p>
-      <p>
-	<strong>Created:</strong>
-	<%= @dictionary.created_at.to_formatted_s(:short) %>
-      </p>
-    </div>
+    <p><strong>Creator:</strong> <%= link_to @dictionary.user.name, @dictionary.user %></p>
+    <p>
+      <strong>Contributors:</strong>
+      <%= @dictionary.users.map { |user| link_to user.name, user }.join(', ').html_safe %>
+    </p>
+    <p>
+      <strong>Created:</strong>
+      <%= @dictionary.created_at.to_formatted_s(:short) %>
+    </p>
+
 
     <div class="btn-group-vertical btn-block" role="group">
       <% if current_user.can_create_entries(@dictionary) %>
@@ -55,12 +49,12 @@
       <% end %>
 
       <% if @dictionary.user == current_user %>
-      <%= link_to 'Edit', edit_dictionary_path(@dictionary), class: 'btn btn-default' %>
+      <%= link_to 'Edit', edit_dictionary_path(@dictionary), class: 'btn btn-primary' %>
       <% end %>
 
-      <%= link_to 'Export to Babylon', dictionary_path(@dictionary, format: :babylon), class: 'btn btn-default' %>
+      <%= link_to 'Export to Babylon', dictionary_path(@dictionary, format: :babylon), class: 'btn btn-secondary' %>
 
-      <%= link_to 'Export to XDXF', dictionary_path(@dictionary, format: :xdxf), class: 'btn btn-default' %>
+      <%= link_to 'Export to XDXF', dictionary_path(@dictionary, format: :xdxf), class: 'btn btn-secondary' %>
 
     </div>
   </div>

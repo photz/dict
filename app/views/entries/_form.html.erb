@@ -16,18 +16,20 @@
 
   <div class="row">
     <div class="col-md-4">
-      <%= f.label :lemmata, class: 'control-label' %>
-      <%= text_area_tag 'entry[lemmata]', @entry.lemmata.join("\n"), {class: 'form-control'} %>
-      <p class="help-block">
-	Add one key word or lemma per line.
-      </p>
+      <fieldset class="form-group">
+	<%= f.label :lemmata %>
+	<%= text_area_tag 'entry[lemmata]', @entry.lemmata.join("\n"), {class: 'form-control'} %>
+	<p class="text-muted">
+	  Add one key word or lemma per line.
+	</p>
+      </fieldset>
     </div>
     <div class="col-md-8">
 
-      <div class="form-group">
-	<%= f.label :content, class: 'control-label' %><br>
+      <fieldset class="form-group">
+	<%= f.label :content %><br>
 	<%= f.text_area :content, class: 'form-control' %>
-      </div>
+      </fieldset>
     </div>
 
   </div>

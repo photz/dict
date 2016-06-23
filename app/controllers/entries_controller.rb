@@ -16,7 +16,7 @@ class EntriesController < ApplicationController
 
   # GET /entries/1/edit
   def edit
-    root_path unless current_user.can_change_entries(@dictionary)
+    root_path unless current_user.can_change_entries(@entry.dictionary)
   end
 
   # POST /entries

@@ -1,0 +1,73 @@
+// Custom bootstrap variables must be set or imported before bootstrap itself.
+@import "bootstrap";
+
+body
+{
+    padding-top: 70px;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+
+
+.playback-on {
+
+}
+
+.playback-on::after {
+    content: 'stop playing';
+}
+
+.playback-off {
+
+}
+
+.playback-off::after {
+    content: 'play'
+}
+
+.record-on {
+
+}
+
+.record-on::after {
+    content: 'stop recording';
+}
+
+.record-off {
+
+}
+
+
+.record-off::after {
+    content: 'record';
+}

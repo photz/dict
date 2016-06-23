@@ -7,6 +7,8 @@ class Entry < ActiveRecord::Base
 
   has_and_belongs_to_many :lemmas, -> { uniq }
 
+  has_many :recordings
+
   validates :lemmas,
             presence: true
 

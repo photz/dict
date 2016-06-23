@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Dict</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= render 'layouts/header' %>
-
-<div class="container">
-
-  <%= yield %>
-</div>
-<%= render 'layouts/footer' %>
-</body>
+  <head>
+    <title><%= Rails.application.config.name %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body data-no-turbolink>
+    <%= render 'layouts/header' %>
+    <% if notice %>
+    <div class="card card-block">
+      <p id="notice" class="card-text"><%= notice %></p>
+    </div>
+    <% end %>
+    <div class="container"><%= yield %></div>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

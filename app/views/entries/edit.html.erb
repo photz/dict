@@ -1,3 +1,7 @@
+<script type="text/javascript">
+  var recordings = <%= @entry.recordings.to_json.html_safe %>;
+</script>
+
 <ol class="breadcrumb">
   <li class=""><%= link_to "Dictionaries", dictionaries_path %></li>
   <li class=""><%= link_to @entry.dictionary.name, @entry.dictionary %></li>
@@ -7,5 +11,16 @@
 <h1>Editing Entry</h1>
 
 <%= render 'form' %>
+
+<div class="row">
+  <div class="col-xs-4">
+    <div id="audio-panel"></div>
+  </div>
+  <div class="col-xs-8">
+    <div id="recordings-list"></div>
+  </div>
+</div>
+
+<input type="hidden" id="entry_id" value="<%= @entry.id %>">
 
 <%= link_to 'Remove', @entry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

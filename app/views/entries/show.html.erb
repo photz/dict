@@ -1,3 +1,7 @@
+<script type="text/javascript">
+  var recordings = <%= @entry.recordings.to_json.html_safe %>;
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <ol class="breadcrumb">
@@ -9,10 +13,10 @@
 
 <div class="row">
   <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-	Key words
-      </div>
+    <div class="card">
+      <div class="card-header">Key words</div>
+
+      
       <div class="list-group">
 	<% @entry.lemmas.each do |lemma| %>
 	<div class="list-group-item"><%= lemma.text %></div>
@@ -21,16 +25,21 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-	Article
-      </div>
-      <div class="panel-body">
-	<p>
-	  <%= article_for_display(@entry.content) %>
-	</p>
-      </div>
+    <div class="card card-block">
+      <h4 class="card-title">Article</h4>
+      <p class="card-text">
+	<%= article_for_display(@entry.content) %>
+      </p>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <div id="audio-panel" class="hidden-xs-up" style=""></div>
+  </div>
+  <div class="col-xs-offset-4 col-xs-8">
+    <div id="recordings-list"></div>
   </div>
 </div>
 
