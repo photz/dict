@@ -21,7 +21,7 @@ class EntriesController < ApplicationController
 
   # POST /entries
   def create
-    root_path unless current_user.can_create_entries(@dictionary)
+    root_path unless current_user.can_create_entries(@entry.dictionary)
 
     @entry = Entry.new(entry_params)
 
@@ -43,7 +43,7 @@ class EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1
   def update
-    root_path unless current_user.can_change_entries(@dictionary)
+    root_path unless current_user.can_change_entries(@entry.dictionary)
 
     lemmata_strings = params[:entry][:lemmata]
                       .strip.split("\n").map {|s| s.strip}
@@ -76,7 +76,7 @@ class EntriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
-      @entry = Entry.includes(:recordings).find_by_id(params[:id])
+      @entry = Entry.includes(:recordings, :lemmas).find_by_id(params[:id])
     end
 
     def set_dictionary

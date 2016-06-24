@@ -82,7 +82,9 @@ class DictionariesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dictionary
-      @dictionary = Dictionary.find_by_id(params[:id])
+      @dictionary = Dictionary
+                    .includes(entries: [:lemmas] )
+                    .find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

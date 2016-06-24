@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
 
   def can_view_dictionary(dictionary)
+
+
     return true if dictionary.user == self
 
     return true if dictionary.public
@@ -39,6 +41,10 @@ class User < ActiveRecord::Base
   end
 
   def can_change_entries(dictionary)
+    unless dictionary.class.to_s === 'Dictionary'
+      raise 'must provide a dictionary, got ' + dictionary.class.to_s
+    end
+
     return true if dictionary.user == self
 
     collaborator = Collaborator.find_by(dictionary: dictionary,
