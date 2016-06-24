@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  var recordings = <%= @entry.recordings.to_json.html_safe %>;
+  var recordings = <%= @entry.recordings.map {|r| {'id'=>r.id, 'user_id' => r.user_id, 'user_name' => r.user.name}}.to_json.html_safe %>;
 </script>
 
 <p id="notice"><%= notice %></p>

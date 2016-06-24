@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
 
 
-  resources :entries, :only => [:show, :edit, :destroy, :update]
+  resources :entries, :only => [:show, :edit, :destroy, :update] do
+    
+    resources :recordings, :only => [:create]
+
+  end
 
   resources :dictionaries do
     resources :entries, :only => [:new, :create]

@@ -412,8 +412,13 @@ var RecordingsList = function(container_id) {
 	var newItem = document.createElement('div');
 	newItem.classList.add('list-group-item');
 
-	newItem.appendChild(
-	    document.createTextNode('recording ' + recording.id + ' created by user ' + recording.user_id));
+	newItem.innerHTML = 'recording created by <a href="/users/' + recording.user_id + '">' + recording.user_name + '</a>';
+
+	var buttonGroup = document.createElement('div');
+	buttonGroup.classList.add('btn-group');
+	buttonGroup.classList.add('pull-xs-right');
+
+	newItem.appendChild(buttonGroup);
 
 	// create the playback button
 
@@ -421,14 +426,13 @@ var RecordingsList = function(container_id) {
 	playButton.classList.add('btn');
 	playButton.classList.add('btn-primary');
 	playButton.classList.add('btn-sm');
-	//playButton.classList.add('pull-xs-right');
 	playButton.appendChild(document.createTextNode('play'))
 
 	playButton.addEventListener('click', function(ev) {
 	    play(recording.id);
 	});
 
-	newItem.appendChild(playButton);
+	buttonGroup.appendChild(playButton);
 
 	// create a button to delete the recording
 
@@ -436,10 +440,15 @@ var RecordingsList = function(container_id) {
 	deleteButton.classList.add('btn');
 	deleteButton.classList.add('btn-danger');
 	deleteButton.classList.add('btn-sm');
-	//deleteButton.classList.add('btn-xs-right');
+
 	deleteButton.appendChild(document.createTextNode('delete'));
 
-	newItem.appendChild(deleteButton);
+	deleteButton.addEventListener('click', function() {
+	    alert('sorry, not yet implemented');// FIXME
+	});
+				      
+
+	buttonGroup.appendChild(deleteButton);
 	
 
 	return newItem;

@@ -4,76 +4,47 @@ class RecordingsController < ApplicationController
 
 
   def create
-    
 
     unless current_user.can_change_entries(@entry.dictionary)
       logger.warning 'a user who is not allowed to change entries tried to upload a recording'
 
-      render :json => {
-               status: 0,
-               msg: 'not allowed to change entries'
-             }
+      render :status => 400
       return
     end
 
     directory = Rails.root.join('public', 'uploads')
 
-    if File.directory?(directory) && File.writable?(directory)
-      logger.info(directory + ' is writeable')
-    else
-      logger.error(directory + ' is NOT writeable')
-
-      render :json => {
-               status: 0,
-               msg: '/uploads no write access'
-             }
-      return
-    end
-    
-
     unless params.has_key? :audio_file
       logger.warning 'recordings#create called, but no file was found'
 
-      render :json => {
-               status: 0,
-               msg: '"no_file" was missing'
-             }
+      render :status => 503
       return
     end
 
     uploaded_io = params[:audio_file]
 
     unless uploaded_io.class == ActionDispatch::Http::UploadedFile
-      render :json => {
-               status: 0,
-               msg: 'no file was uploaded?'
-             }
+      render :status => 503
       return
     end
 
     recording = Recording.new(entry: @entry, user: current_user)
     unless recording.save
       raise 'unable to save recording' + debug(recording.errors)
+      render :status => 503
     end
 
-    filepath = Rails.root.join('public', 'uploads',
-                               recording.id.to_s + '.ogg')
+    filepath = Rails.root.join(directory, recording.id.to_s + '.ogg')
 
     begin
-      
       File.open(filepath, 'wb') do |file|
         file.write(uploaded_io.read)
       end
-
     rescue StandardError => e
 
       logger.error 'unable to store uploaded file locally'
 
-      render :json => {
-               status: 0,
-               msg: 'error 12'
-             }
-
+      render :status => 503
       return
     end
 
@@ -81,7 +52,11 @@ class RecordingsController < ApplicationController
 
     render :json => {
              status: 1,
-             recording: recording
+             recording: {
+               id: recording.id,
+               user_id: recording.user_id,
+               user_name: recording.user.name
+             }
            }      
 
   end
