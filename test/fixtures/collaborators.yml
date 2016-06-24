@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  dictionary_id: 
+  can_create_entries: false
+  can_change_entries: false
+  can_delete_entries: false
+
+two:
+  user_id: 
+  dictionary_id: 
+  can_create_entries: false
+  can_change_entries: false
+  can_delete_entries: false
